@@ -8,13 +8,7 @@ var Note = require('./note');
 // instantiate express
 const app = express();
 
-mongoose.Promise = global.Promise;
-var options = {
-    useMongoClient: true,
-    user: 'admin',
-    pass: 'admin'
-  };
-mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds133017.mlab.com:33017/todoapp1996', options);
+mongoose.connect('mongodb://admin:admin@ds133017.mlab.com:33017/todoapp1996');
 const db = mongoose.connection;
 db.on('error', err => {
   console.error(`Error while connecting to DB: ${err.message}`);
@@ -46,13 +40,26 @@ router.get('/', function(req,res){
     res.json({message: 'welcome to uor api'});
 });
 
-/*router.route('/notes')
-    .post(funtion(req,res){
+router.route('/notes')
+    .post(function(req,res){
         var note = new Note();
-        
+        note.title = req.body.title;
+        note.body = req.body.body;
 
+        note.save(function(err){
+            if(err){res.send(err);}
+            console.log(note);
+            res.json(note);
+        });
     })
-*/
+
+    .get(function(req,res){
+        Note.find(function(err,notes){
+            if(err){res.send(err);}
+            res.json(notes);
+        });
+    })
+
 
 
 app.use(function (req, res, next) {
