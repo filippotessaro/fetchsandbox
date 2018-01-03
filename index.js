@@ -2,10 +2,26 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var Note = require('./note');
 
 // instantiate express
 const app = express();
 
+mongoose.Promise = global.Promise;
+var options = {
+    useMongoClient: true,
+    user: 'admin',
+    pass: 'admin'
+  };
+mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds133017.mlab.com:33017/todoapp1996', options);
+const db = mongoose.connection;
+db.on('error', err => {
+  console.error(`Error while connecting to DB: ${err.message}`);
+});
+db.once('open', () => {
+  console.log('DB connected successfully!');
+});
 
 
 app.use(express.static(__dirname + '/public')); 				// set the static files location /public/img will be /img for users
@@ -24,6 +40,20 @@ app.get('/', function(req, res) {
     res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
+var router = express.Router();
+
+router.get('/', function(req,res){
+    res.json({message: 'welcome to uor api'});
+});
+
+/*router.route('/notes')
+    .post(funtion(req,res){
+        var note = new Note();
+        
+
+    })
+*/
+
 
 app.use(function (req, res, next) {
     // do logging
@@ -40,6 +70,7 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('/api', router);
 
 // handle invalid requests and internal error
 app.use((req, res, next) => {
