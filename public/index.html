@@ -111,6 +111,7 @@
             <div class="card card-body mb-3">
               <h3>${data.title}</h3>
               <p>${data.body}</p>
+              <p class=".text-danger">${post._id}</p>
             </div>
           `;
         document.getElementById('output').innerHTML = output;
@@ -128,6 +129,7 @@
             <div class="card card-body mb-3">
               <h3>${post.title}</h3>
               <p>${post.body}</p>
+              <p class="text-danger">${post._id}</p>
             </div>
           `;
         });
