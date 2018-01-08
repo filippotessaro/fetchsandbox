@@ -1,7 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+var mongoose = require('mongoose');
+var Note = require('./note');
 const router = express.Router();
+
+mongoose.connect('mongodb://admin:admin@ds133017.mlab.com:33017/todoapp1996');
+const db = mongoose.connection;
+db.on('error', err => {
+  console.error(`Error while connecting to DB: ${err.message}`);
+});
+db.once('open', () => {
+  console.log('DB connected successfully!');
+});
 
 
 router.get('/', function(req,res){

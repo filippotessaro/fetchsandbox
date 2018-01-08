@@ -2,21 +2,14 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var Note = require('./note');
+
+
 var router = require('./router');
 
 // instantiate express
 const app = express();
 
-mongoose.connect('mongodb://admin:admin@ds133017.mlab.com:33017/todoapp1996');
-const db = mongoose.connection;
-db.on('error', err => {
-  console.error(`Error while connecting to DB: ${err.message}`);
-});
-db.once('open', () => {
-  console.log('DB connected successfully!');
-});
+
 
 
 app.use(express.static(__dirname + '/public')); 				// set the static files location /public/img will be /img for users
