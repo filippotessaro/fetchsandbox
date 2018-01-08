@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Fetch API Sandbox</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   
 </head>
@@ -28,6 +30,9 @@
       </div>
       <input type="submit" class="btn btn-secondary" value="Submit">
     </form>
+  </div>
+  <div>
+    <p>CIao come va' devo sparire con un click</p>
   </div>
 
   <script>
@@ -134,9 +139,24 @@
             </div>
           `;
         });
-        document.getElementById('output').innerHTML = output;
+        //document.getElementById('output').innerHTML = output;
+        $("#output").append(output);
       })
+      
     }
+
+    
+      // $("p").click(function(){
+      //     console.log("premuto");
+      //     $(this).hide();
+      //   }); 
+
+        $('body').on('click','p',function(){
+          alert("success");
+          let elem = $(this).html();
+          console.log(elem);
+        });  
+        
 
   </script>
 </body>
