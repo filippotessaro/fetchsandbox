@@ -42,18 +42,6 @@ const deleteNote = function(noteID){
     })
 }
 
-// .put(function(req,res){
-//     Note.findById(req.params.note_id, function(err,note){
-//         if(err){res.send(err);}
-//         note.title = req.body.title;
-//         note.body = req.body.body;
-
-//         note.save(function(err){
-//             if (err) { res.send(err); }
-//             res.json(note);
-//         });
-//     });
-
 const putNote = function(note,noteID){
     return fetch('https://fetchsandbox.herokuapp.com/api/notes/'+noteID,{
         method: 'PUT',
@@ -81,11 +69,11 @@ test('basic post and get the posted element', () =>{
 });
 
 test('test del put di una nota', ()=>{
-    return putNote(newContent,exampleNote._id)
-    // .then(data =>{return data.stringify()})
-    .then(newModifiedNote => {
-        expect(newModifiedNote.title).toBe(newContent.title);
-        expect(newModifiedNote.body).toBe(newContent.body);
+    return putNote(newContent,exampleNote.noteID)
+    .then(data =>{return data.json()})
+    .then(note => {
+        expect(note.title).toBe(newContent.title);
+        expect(note.body).toBe(newContent.body);
     })
 })
 
