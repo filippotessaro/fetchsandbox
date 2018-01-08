@@ -55,10 +55,10 @@ test('basic post and get the posted element', () =>{
 test('delete sample item', () =>{
     return deleteNote(exampleNote.noteID)
     .then(res => {return res.json()})    
-    .then(response => {expect(response.message).toBe('Succesfully deleted');})
+    .then(response => {expect(response.status).toBe(204);})
 });
 
-// test('delete item actually deteted', ()=>{
-//     return deleteNote(exampleNote.noteID)
-//         .then(response => {expect(response.status).toBe(404);})
-// });
+test('delete item actually deteted', ()=>{
+    return deleteNote(exampleNote.noteID)
+        .then(response => {expect(response.status).toBe(404);})
+});

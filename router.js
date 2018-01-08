@@ -58,11 +58,15 @@ router.route('/notes/:note_id')
         });
     })
     .delete(function(req,res){
-        Note.remove({_id: req.params.note_id
-        },function(err,note){
-            if(err){res.send(err);}
-            res.json({message: 'Succesfully deleted'});
-        });
+        Note
+        .findByIdAndRemove(req.params.note_id)
+        .exec()
+        .then(doc =>{
+            if(!doc){return res.status(404).end(); }
+            return res.status(204).end();
+        })
+        .catch(err => next(err));
+
     })
 
 
