@@ -4,6 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Note = require('./note');
+var router = require('./router');
 
 // instantiate express
 const app = express();
@@ -34,59 +35,7 @@ app.get('/', function(req, res) {
     res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
-var router = express.Router();
-
-router.get('/', function(req,res){
-    res.json({message: 'welcome to uor api'});
-});
-
-router.route('/notes')
-    .post(function(req,res){
-        var note = new Note();
-        note.title = req.body.title;
-        note.body = req.body.body;
-
-        note.save(function(err){
-            if(err){res.send(err);}
-            console.log(note);
-            res.json(note);
-        });
-    })
-
-    .get(function(req,res){
-        Note.find(function(err,notes){
-            if(err){res.send(err);}
-            res.json(notes);
-        });
-    })
-
-router.route('/notes/:note_id')
-    .get(function(req,res){
-        Note.findById(req.params.note_id, function (err, note) {
-            if (err) { res.send(err); }
-            res.json(note);
-        });
-    })
-    .put(function(req,res){
-        Note.findById(req.params.note_id, function(err,note){
-            if(err){res.send(err);}
-            note.title = req.body.title;
-            note.body = req.body.body;
-
-            note.save(function(err){
-                if (err) { res.send(err); }
-                res.json(note);
-            });
-        });
-    })
-    .delete(function(req,res){
-        Note.remove({_id: req.params.note_id
-        },function(err,note){
-            if(err){res.send(err);}
-            res.json({message: 'Succesfully deleted'});
-        });
-    })
-
+//var router = express.Router();
 
 
 app.use(function (req, res, next) {
