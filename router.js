@@ -56,6 +56,19 @@ router.route('/notes/:note_id')
                 res.json(note);
             });
         });
+        // Note
+        // .findById(req.params.note_id)
+        // .exec()
+        // .then(note => {
+        //     note.title = req.body.title;
+        //     note.body = req.body.body;
+
+        //     note.save(function(err){
+        //         if (err) { res.send(err); }
+        //         res.json(note);
+        //     });
+        // })
+        // .catch(err => next(err));
     })
     .delete(function(req,res){
         Note

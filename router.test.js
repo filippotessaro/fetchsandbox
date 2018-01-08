@@ -6,6 +6,11 @@ const exampleNote = {
     'body':'questo mi serve come test della nuova api'
 }
 
+const newContent = {
+    'title':'Titolo Modificato',
+    'body':'corpo Modifiato'
+}
+
 
 const postNote = function(note){
     return fetch('https://fetchsandbox.herokuapp.com/api/notes',{
@@ -37,6 +42,29 @@ const deleteNote = function(noteID){
     })
 }
 
+// .put(function(req,res){
+//     Note.findById(req.params.note_id, function(err,note){
+//         if(err){res.send(err);}
+//         note.title = req.body.title;
+//         note.body = req.body.body;
+
+//         note.save(function(err){
+//             if (err) { res.send(err); }
+//             res.json(note);
+//         });
+//     });
+
+const putNote = function(note,noteID){
+    return fetch('https://fetchsandbox.herokuapp.com/api/notes/'+noteID,{
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(note)
+    })
+}
+
 test('basic post and get the posted element', () =>{
     return postNote(exampleNote)
         .then(res => {return res.json()})
@@ -52,9 +80,18 @@ test('basic post and get the posted element', () =>{
         })
 });
 
+test('test del put di una nota', ()=>{
+    return putNote(newContent,exampleNote._id)
+    // .then(data =>{return data.stringify()})
+    .then(newModifiedNote => {
+        expect(newModifiedNote.title).toBe(newContent.title);
+        expect(newModifiedNote.body).toBe(newContent.body);
+    })
+})
+
 test('delete sample item', () =>{
     return deleteNote(exampleNote.noteID)
-    .then(res => {return res.json()})    
+    // .then(res => {return res.json()})    
     .then(response => {expect(response.status).toBe(204);})
 });
 
