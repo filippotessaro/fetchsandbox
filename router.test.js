@@ -1,4 +1,5 @@
-const url = 'https://fetchsandbox.herokuapp.com/api'
+const root = process.env.SERVER_URL || 'http://127.0.0.1:8080'
+const assignmentsRoot = root+'/api/notes'
 const fetch = require('node-fetch')
 
 const exampleNote = {
@@ -13,7 +14,7 @@ const newContent = {
 
 
 const postNote = function(note){
-    return fetch('https://fetchsandbox.herokuapp.com/api/notes',{
+    return fetch(assignmentsRoot,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -24,7 +25,7 @@ const postNote = function(note){
 }
 
 const getOneNote = function(noteID){
-    return fetch('https://fetchsandbox.herokuapp.com/api/notes/'+noteID, {
+    return fetch(assignmentsRoot+'/'+noteID, {
         method: 'GET',
         headers: {
             'Accept': 'application/json'
@@ -33,7 +34,7 @@ const getOneNote = function(noteID){
 }
 
 const deleteNote = function(noteID){
-    return fetch('https://fetchsandbox.herokuapp.com/api/notes/'+noteID, {
+    return fetch(assignmentsRoot+'/'+noteID, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -43,7 +44,7 @@ const deleteNote = function(noteID){
 }
 
 const putNote = function(note,noteID){
-    return fetch('https://fetchsandbox.herokuapp.com/api/notes/'+noteID,{
+    return fetch(assignmentsRoot+'/'+noteID,{
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
