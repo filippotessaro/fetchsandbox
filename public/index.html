@@ -150,12 +150,19 @@
       //     console.log("premuto");
       //     $(this).hide();
       //   }); 
-
-        $('body').on('click','p',function(){
-          alert("success");
-          let elem = $(this).html();
-          console.log(elem);
-        });  
+    
+    $('body').on('click','p',function(){
+      alert("success");
+      let elem = $(this).html();
+      console.log(elem);
+      fetch('https://fetchsandbox.herokuapp.com/api/notes/'+elem,{
+        method:'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Content-type':'application/json'
+        }
+      }).then($(this).hide())
+    });  
         
 
   </script>

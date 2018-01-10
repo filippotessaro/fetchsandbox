@@ -13,7 +13,7 @@ db.once('open', () => {
   console.log('DB connected successfully!');
 });
 
-
+//  ../api/
 router.get('/', function(req,res){
     res.json({message: 'welcome to uor api'});
 });
@@ -38,6 +38,7 @@ router.route('/notes')
         });
     })
 
+//  ../api/notes/:note_id => GET, PUT, DELETE
 router.route('/notes/:note_id')
     .get(function(req,res){
         Note.findById(req.params.note_id, function (err, note) {
@@ -56,6 +57,7 @@ router.route('/notes/:note_id')
                 res.json(note);
             });
         });
+        //PROMISE
         // Note
         // .findById(req.params.note_id)
         // .exec()

@@ -9,10 +9,8 @@ var router = require('./router');
 // instantiate express
 const app = express();
 
-
-
-
-app.use(express.static(__dirname + '/public')); 				// set the static files location /public/img will be /img for users
+// set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + '/public'));
 
 
 // configure app to use bodyParser()
@@ -28,9 +26,8 @@ app.get('/', function(req, res) {
     res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
-//var router = express.Router();
 
-
+//Enable CORS
 app.use(function (req, res, next) {
     // do logging
     console.log('Something is happening.');
