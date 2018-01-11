@@ -31,9 +31,9 @@
       <input type="submit" class="btn btn-secondary" value="Submit">
     </form>
   </div>
-  <div>
+  <!-- <div>
     <p>CIao come va' devo sparire con un click</p>
-  </div>
+  </div> -->
 
   <script>
     document.getElementById('getText').addEventListener('click', getText);
@@ -144,13 +144,7 @@
       })
       
     }
-
-    
-      // $("p").click(function(){
-      //     console.log("premuto");
-      //     $(this).hide();
-      //   }); 
-    
+ 
     $('body').on('click','p',function(){
       alert("success");
       let elem = $(this).html();

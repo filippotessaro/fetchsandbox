@@ -1,4 +1,4 @@
-const foo = require('./function');
+const foo = require('../function');
 
 test('prova con foo 0,-1 per function 100%', ()=>{
     expect(foo(0,-1));
