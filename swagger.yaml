@@ -24,17 +24,6 @@ paths:
     get:
       description: Retrieves notes 
       operationId: getNotes
-      parameters:
-        - name: title
-          in: query
-          description: title of a note
-          required: false
-          type: string
-        - name: body
-          in: query
-          description: body of the note
-          required: false
-          type: string
       responses:
         200:
           description: list of notes which are in the DB
@@ -56,12 +45,12 @@ paths:
         201:
           description: assignment created response
           schema:
-            $ref: '#/definitions/Assignment'
+            $ref: '#/definitions/NewNote'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /assignments/{id}:
+  /notes/{id}:
     get:
       description: Returns an assignment
       operationId: findbyassignment id
@@ -76,14 +65,14 @@ paths:
         200:
           description: OK - assignment
           schema:
-            $ref: '#/definitions/Assignment'
+            $ref: '#/definitions/NewNote'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     put:
-      description: Updates an existing assignment, or create a new one with ID.
-      operationId: updateAssignment
+      description: Update an existing note, or create a new one with ID.
+      operationId: updateNote
       parameters:
         - name: id
           in: path
@@ -96,35 +85,35 @@ paths:
           description: assignment
           required: true
           schema:
-            $ref: '#/definitions/Assignment'
+            $ref: '#/definitions/NewNote'
       responses:
         202:
           description: assignment update response
           schema:
-            $ref: '#/definitions/Assignment'
+            $ref: '#/definitions/NewNote'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     delete:
-      description: deletes a single assignment based on the ID supplied
-      operationId: deleteAssignment
+      description: deletes a single note based on the ID supplied
+      operationId: deleteNote
       parameters:
         - name: id
           in: path
-          description: ID of assignment to delete
+          description: ID of note to delete
           required: true
           type: string
-          x-example: 'erwtre34-36fws'
+          x-example: '5a50a9241e355b00040a50a5'
       responses:
         204:
-          description: assigment deleted
+          description: note deleted
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
 definitions:
-  Assignment:
+  Notes:
     allOf:
       - $ref: '#/definitions/NewNote'
       - required:
@@ -132,12 +121,6 @@ definitions:
         properties:
           assignmentID:
             type: string
-          ipAddress:
-            type: string
-            format: ipv6
-          dateUpdated: 
-            type: string
-            format: date-time
   NewNote:
     required:
       - title
