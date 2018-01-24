@@ -22,7 +22,7 @@ produces:
 paths:
   /notes:
     get:
-      description: Retrieves notes 
+      description: Retrieves all notes 
       operationId: getNotes
       responses:
         200:
@@ -30,7 +30,7 @@ paths:
         default:
           description: unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: '#/definitions/Note'
     post:
       description: Uploads a new note.
       operationId: addAssignment
