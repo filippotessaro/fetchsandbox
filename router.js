@@ -47,21 +47,8 @@ router.route('/notes/:note_id')
         });
     })
     .put(function(req,res){
-        Note.findById(req.params.note_id, function(err,note){
-            if(err){res.send(err);}
-            note.title = req.body.title;
-            note.body = req.body.body;
-
-            note.save(function(err){
-                if (err) { res.send(err); }
-                res.json(note);
-            });
-        });
-        //PROMISE
-        // Note
-        // .findById(req.params.note_id)
-        // .exec()
-        // .then(note => {
+        // Note.findById(req.params.note_id, function(err,note){
+        //     if(err){res.send(err);}
         //     note.title = req.body.title;
         //     note.body = req.body.body;
 
@@ -69,8 +56,22 @@ router.route('/notes/:note_id')
         //         if (err) { res.send(err); }
         //         res.json(note);
         //     });
-        // })
-        // .catch(err => next(err));
+        // });
+        
+        //PROMISE
+        Note
+        .findById(req.params.note_id)
+        .exec()
+        .then(note => {
+            note.title = req.body.title;
+            note.body = req.body.body;
+
+            note.save(function(err){
+                if (err) { res.send(err); }
+                res.json(note);
+            });
+        })
+        .catch(err => next(err));
     })
     .delete(function(req,res){
         Note

@@ -100,7 +100,7 @@
       let title = document.getElementById('title').value;
       let body = document.getElementById('body').value;
 
-      fetch('https://fetchsandbox.herokuapp.com/api/notes', {
+      fetch('http://localhost:8080/api/notes', {
         method:'POST',
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -126,7 +126,7 @@
     }
 
     function getDB(){
-      fetch('https://fetchsandbox.herokuapp.com/api/notes')
+      fetch('http://localhost:8080/api/notes')
       .then((res) => res.json())
       .then((data) => {
         let output = '<h2 class="mb-4">Notes</h2>';
@@ -149,7 +149,7 @@
       alert("success");
       let elem = $(this).html();
       console.log(elem);
-      fetch('https://fetchsandbox.herokuapp.com/api/notes/'+elem,{
+      fetch('http://localhost:8080/api/notes/'+elem,{
         method:'DELETE',
         headers: {
           'Accept': 'application/json',
