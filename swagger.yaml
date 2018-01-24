@@ -45,7 +45,7 @@ paths:
         201:
           description: assignment created response
           schema:
-            $ref: '#/definitions/NewNote'
+            $ref: '#/definitions/Note'
         default:
           description: unexpected error
           schema:
@@ -60,12 +60,12 @@ paths:
           description: ID of assignment to fetch
           required: true
           type: string
-          x-example: 'some-example'
+          x-example: '5a50a9241e355b00040a50a5'
       responses:
         200:
           description: OK - assignment
           schema:
-            $ref: '#/definitions/NewNote'
+            $ref: '#/definitions/Note'
         default:
           description: unexpected error
           schema:
@@ -126,6 +126,18 @@ definitions:
       - title
       - body
     properties:
+      title:
+        type: string
+      body:
+        type: string
+  Note:
+    required:
+      - _id
+      - title
+      - body
+    properties:
+      _id: 
+        type: string
       title:
         type: string
       body:
