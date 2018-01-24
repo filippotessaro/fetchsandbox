@@ -2,8 +2,6 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-
-
 var router = require('./router');
 
 // instantiate express

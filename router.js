@@ -15,7 +15,7 @@ db.once('open', () => {
 
 //  ../api/
 router.get('/', function(req,res){
-    res.json({message: 'welcome to uor api'});
+    res.json({message: 'welcome to my api'});
 });
 
 router.route('/notes')
